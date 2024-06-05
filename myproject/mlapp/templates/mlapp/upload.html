@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Image</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <script src="{% static 'js/script.js' %}" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Upload Image</h1>
+    </header>
+    <main>
+        <div class="content">
+            {% if predicted_label %}
+                <div class="result">
+                    <p>Predicted Label: <strong>{{ predicted_label }}</strong></p>
+                    <img src="{{ image_url }}" alt="Uploaded Image">
+                </div>
+            {% endif %}
+            <form id="uploadForm" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="file" name="image" id="imageInput" accept="image/*">
+                <button type="submit" class="btn">Upload</button>
+            </form>
+            <div id="loading" class="hidden">Processing...</div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Fashion MNIST Classifier</p>
+    </footer>
+</body>
+</html>
